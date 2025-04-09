@@ -14,14 +14,16 @@
     <nav class="shadow-lg">
         <div class="container flex flex-col md:flex-row gap-5 items-center justify-between py-3">
             <div>
-                <img class="h-12" src="https://codeit.com.np/storage/01JJ6HWH8RP35HYNCEBFXVYZKF.png" alt="Logo">
+                <a href="{{route('homepage')}}">
+                    <img class="h-12" src="https://codeit.com.np/storage/01JJ6HWH8RP35HYNCEBFXVYZKF.png" alt="Logo">
+                </a>
             </div>
             <div>
                 <form action="" method="get">
                     <div class="flex items-center">
                         <input type="search" name="search" id="search" placeholder="Search">
-                        <button type="submit" class="bg-[#ababab] border border-[#ababab] text-white px-4 py-2">compare <i
-                                class="fa-solid fa-magnifying-glass"></i></button>
+                        <button type="submit" class="bg-[#ababab] border border-[#ababab] text-white px-4 py-2">compare
+                            <i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                 </form>
             </div>

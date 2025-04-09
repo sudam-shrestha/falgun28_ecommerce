@@ -39,45 +39,43 @@
                         </div>
                         <!-- Modal body -->
                         <div class="p-4 md:p-5 space-y-4">
-                            <form action="" method="post">
+                            <form action="{{ route('seller_store') }}" method="post">
                                 @csrf
                                 <div class="grid grid-cols-2 gap-4">
                                     <div>
                                         <label for="name" class="block mb-2 text-sm font-medium">Your
-                                            Name</label>
+                                            Name <span class="text-red-600">*</span></label>
                                         <input type="text" name="name" id="name" class="w-full" />
                                     </div>
 
                                     <div>
-                                        <label for="email"
-                                            class="block mb-2 text-sm font-medium">Your
-                                            Email</label>
+                                        <label for="email" class="block mb-2 text-sm font-medium">Your
+                                            Email <span class="text-red-600">*</span></label>
                                         <input type="email" name="email" id="email" class="w-full" />
                                     </div>
 
                                     <div>
-                                        <label for="contact_number"
-                                            class="block mb-2 text-sm font-medium">Your
-                                            COntact Number</label>
-                                        <input type="text" name="contact_number" id="contact_number" class="w-full" />
+                                        <label for="contact_number" class="block mb-2 text-sm font-medium">Your
+                                            Contact Number <span class="text-red-600">*</span></label>
+                                        <input type="text" name="contact_number" id="contact_number"
+                                            class="w-full" />
                                     </div>
 
                                     <div>
-                                        <label for="address"
-                                            class="block mb-2 text-sm font-medium">Your
-                                            Shop Address</label>
+                                        <label for="address" class="block mb-2 text-sm font-medium">Your
+                                            Shop Address <span class="text-red-600">*</span></label>
                                         <input type="text" name="address" id="address" class="w-full" />
                                     </div>
 
                                     <div>
-                                        <label for="pan_no"
-                                            class="block mb-2 text-sm font-medium">PAN NO</label>
+                                        <label for="pan_no" class="block mb-2 text-sm font-medium">PAN NO <span
+                                                class="text-red-600">*</span></label>
                                         <input type="text" name="pan_no" id="pan_no" class="w-full" />
                                     </div>
 
                                     <div>
-                                        <label for="reg_no"
-                                            class="block mb-2 text-sm font-medium">Reg NO</label>
+                                        <label for="reg_no" class="block mb-2 text-sm font-medium">Reg NO <span
+                                                class="text-red-600">*</span></label>
                                         <input type="text" name="reg_no" id="reg_no" class="w-full" />
                                     </div>
 
@@ -92,5 +90,25 @@
             </div>
 
         </div>
+    </section>
+
+
+    <section class="">
+        <div class="container py-10 flex items-center justify-between">
+            <div>
+                <h1 class="text-3xl font-bold text-center">
+                    About Us
+                </h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, exercitationem dolorum. Quaerat,
+                    quia. Non hic ea incidunt officia ratione repudiandae voluptates ut sit dolor. Delectus ducimus
+                    laborum at velit sunt?
+                </p>
+
+                <a href="{{ route('about') }}">read more</a>
+            </div>
+
+            <img src="https://media.istockphoto.com/id/1221653457/photo/close-up-of-a-touchscreen-social-media-concept.jpg?s=612x612&w=0&k=20&c=thcgiLGWFoRNMrMiDXDGUGPy50i9jhXhiHSy-vokyqI="
+                alt="">
     </section>
 </x-frontend-layout>
