@@ -14,12 +14,12 @@
     <nav class="shadow-lg">
         <div class="container flex flex-col md:flex-row gap-5 items-center justify-between py-3">
             <div>
-                <a href="{{route('homepage')}}">
+                <a href="{{ route('homepage') }}">
                     <img class="h-12" src="https://codeit.com.np/storage/01JJ6HWH8RP35HYNCEBFXVYZKF.png" alt="Logo">
                 </a>
             </div>
             <div>
-                <form action="{{route('compare')}}" method="get">
+                <form action="{{ route('compare') }}" method="get">
                     <div class="flex items-center">
                         <input type="search" name="q" id="search" placeholder="Search">
                         <button type="submit" class="bg-[#ababab] border border-[#ababab] text-white px-4 py-2">compare
@@ -28,8 +28,8 @@
                 </form>
             </div>
             <div class="flex gap-2 items-center">
-                <a href="" class="btn-primary">SignIn</a>
-                <a href="" class="btn-secondary">SignUp</a>
+                <a href="{{ route('login') }}" class="btn-primary">SignIn</a>
+                <a href="{{ route('register') }}" class="btn-secondary">SignUp</a>
             </div>
         </div>
     </nav>
