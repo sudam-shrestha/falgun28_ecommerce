@@ -4,9 +4,11 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -35,7 +37,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/khalti-callback', [OrderController::class, 'khalti_callback'])->name('khalti_callback');
 
 
+    Route::get('/success', [OrderController::class, 'success'])->name('success');
+    Route::get('/failure', [OrderController::class, 'failure'])->name('failure');
+
 });
+
+Route::get("/order/invoice/{id}", function ($id) {
+    $order = Order::find($id);
+    return view('invoice', compact('order'));
+})->name('invoice');
 
 Route::get('/google/login', function () {
     return Socialite::driver('google')->redirect();
@@ -58,6 +68,11 @@ Route::get('/google/callback', function () {
 
     Auth::login($newUser);
     return redirect('/');
+});
+
+Route::get("/calender",function(){
+   $response = Http::get("https://www.ashesh.com.np/panchang/widget.php");
+   return $response->body();
 });
 
 require __DIR__ . '/auth.php';

@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Zerkxubas\EsewaLaravel\Facades\Esewa;
 
 use function Pest\Laravel\withHeader;
 
@@ -26,7 +28,7 @@ class OrderController extends Controller
         $order->user_id = $user->id;
         $order->total_amount = $request->total_amount;
         $order->status = 'pending';
-        $order->payment_method = 'khalti';
+        $order->payment_method = $request->payment_method;
         $order->save();
 
         $carts = [];
@@ -47,25 +49,35 @@ class OrderController extends Controller
         }
         Cookie::queue('order_id', $order->id);
 
-        $response = Http::withHeaders([
-            "Authorization" => "key ffcf180e4d4b439ba184930aa35a625c",
-            'Content-Type' => 'application/json'
-        ])->post(
-            'https://dev.khalti.com/api/v2/epayment/initiate/',
-            [
-                'return_url' => route('khalti_callback'),
-                'website_url' => route('homepage'),
-                'amount' => $request->total_amount * 100,
-                'purchase_order_id' => $order->id,
-                'purchase_order_name' => $order->seller->name,
-            ]
-        );
+        if ($request->payment_method == 'khalti') {
+            $response = Http::withHeaders([
+                "Authorization" => "key ffcf180e4d4b439ba184930aa35a625c",
+                'Content-Type' => 'application/json'
+            ])->post(
+                'https://dev.khalti.com/api/v2/epayment/initiate/',
+                [
+                    'return_url' => route('khalti_callback'),
+                    'website_url' => route('homepage'),
+                    'amount' => $request->total_amount * 100,
+                    'purchase_order_id' => $order->id,
+                    'purchase_order_name' => $order->seller->name,
+                ]
+            );
 
-        if ($response->successful()) {
-            $paymentUrl = $response['payment_url'];
-            return redirect($paymentUrl);
+            if ($response->successful()) {
+                $paymentUrl = $response['payment_url'];
+                return redirect($paymentUrl);
+            } else {
+                return back()->with('error', 'Failed to initiate Khalti payment.');
+            }
+        } elseif ($request->payment_method == 'esewa') {
+            $pid = uniqid();
+            $product_code = "EPAYTEST";
+            $message = $order->total_amount.$pid.$product_code;
+            $signature = base64_encode(hash_hmac('sha256', $message, '8gBm/:&EnhH.1/q', true));
+            return view('frontend.esewa', compact('order', 'pid', 'product_code', 'signature'));
         } else {
-            return back()->with('error', 'Failed to initiate Khalti payment.');
+            return view("frontend.404");
         }
 
         // return $response->payment_url;
@@ -93,5 +105,19 @@ class OrderController extends Controller
         }
 
         return redirect('/');
+    }
+
+    public function success(Request $request)
+    {
+        $order_id = Cookie::get('order_id');
+        $order = Order::find($order_id);
+        $order->status = 'paid';
+        $order->save();
+        return redirect('/');
+    }
+
+    public function failure(Request $request)
+    {
+        return view("frontend.404");
     }
 }

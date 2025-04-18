@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "700db02b653b573b7255ee4ef4de9a4e",
+    "content-hash": "0a0caa151cd7ea502e8333d13c891df2",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -7954,6 +7954,68 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "zerkxubas/esewa-laravel",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zerkxubas/esewa-laravel.git",
+                "reference": "e76784e82d58e5e5ca1ed62a89a075d7d8e5382b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zerkxubas/esewa-laravel/zipball/e76784e82d58e5e5ca1ed62a89a075d7d8e5382b",
+                "reference": "e76784e82d58e5e5ca1ed62a89a075d7d8e5382b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-simplexml": "*",
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.42",
+                "phpunit/phpunit": "^9.6.15",
+                "rector/rector": "^0.18.13"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Zerkxubas\\EsewaLaravel\\Laravel\\EsewaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zerkxubas\\EsewaLaravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Subash Sharma",
+                    "email": "zerkxubas@gmail.com",
+                    "homepage": "https://zerkbro.com"
+                }
+            ],
+            "description": "This package makes the integration of Esewa payment gateway easier.",
+            "keywords": [
+                "esewa",
+                "laravel",
+                "nepal",
+                "payment",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/zerkxubas/esewa-laravel/issues",
+                "source": "https://github.com/zerkxubas/esewa-laravel/tree/v1.1.0"
+            },
+            "time": "2024-02-17T17:09:12+00:00"
         }
     ],
     "packages-dev": [
